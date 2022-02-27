@@ -86,17 +86,42 @@ public:
             i++;
         }
         int soma = 0;
-        
-        for (int i = 0; i < n - 1; i ++ ) cout << output[i].s << endl;
-        // Saída do código
+        int temp;
+        //bubble sort para organizar o resultado
         for (int i = 0; i < n - 1; i++)
         {
-            if (s_arg) cout << "(" << output[i].s << ","
-                 << " " << output[i].d << ")"
-                 << " ";
+            for (int j = 0; j < n - 2; j++)
+            {
+                if (output[j].s > output[j + 1].s)
+                {
+                    temp = output[j].s;
+                    output[j].s = output[j + 1].s;
+                    output[j + 1].s = temp;
+                    temp = output[j].d;
+                    output[j].d = output[j + 1].d;
+                    output[j + 1].d = temp;
+                }
+                if (output[j].s == output[j + 1].s)
+                {
+                    if (output[j].d > output[j + 1].d)
+                    {
+                        temp = output[j].d;
+                        output[j].d = output[j + 1].d;
+                        output[j + 1].d = temp;
+                    }
+                }
+            }
+        } // Saída do código
+        for (int i = 0; i < n - 1; i++)
+        {
+            if (s_arg)
+                cout << "(" << output[i].s << ","
+                     << " " << output[i].d << ")"
+                     << " ";
             soma += output[i].w;
         }
-        if (!s_arg) cout << soma << endl;
+        if (!s_arg)
+            cout << soma << endl;
         return output;
     }
 };
