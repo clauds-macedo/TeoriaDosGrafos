@@ -15,23 +15,41 @@ void help(){
 
 int main(int argc, char* argv[]){
 
-    int f = 0, in;
-    std::string inputFile, src;
-    
+    int f = 0, in, invalue, only_help = 0;
+    char* inputFile;
+    char* src;
+    system("g++ kruskal.cpp -o kruskal");
+    char comando[255] = "./kruskal ";   
+
     for (int i = 0; i < argc; i++){
-        if(!strcmp(argv[i], "-h")) help();
-        if(!strcmp(argv[i], "-f")){f++; inputFile = argv[i+1]; }
-        if(!strcmp(argv[i], "-i")){in++; src = argv[i+1];}
-    }
-    if (f){
-        system("g++ kruskal.cpp -o kruskal");
-        try {
-            system(("./kruskal < "+inputFile).c_str());
-        }catch(int e){
-            if (e==1) throw "Arquivo não encontrado";
+        if(!strcmp(argv[i], "-f")){
+            f++; inputFile = argv[i+1]; 
+            strcat(comando, "< ");
+            strcat(comando, inputFile);
+            only_help--;
         }
-        if(in)system(("./kruskal < "+inputFile + " -i " + src).c_str());
+
+        if(!strcmp(argv[i], "-i")){
+            strcat(comando, " -i ");
+            strcat(comando, argv[i+1]);
+        }
+
+        if(!strcmp(argv[i], "-l")){
+            strcat(comando, " -l ");
+            strcat(comando, argv[i+1]);
+        }
+
+        if(!strcmp(argv[i], "-s")){
+            strcat(comando, " -s ");
+        }
+
+        if(!strcmp(argv[i], "-h")) {
+            help(); 
+            only_help++;
+        }
     }
+
+    if (only_help <= 0)system(comando);
 
     return 0;
 
