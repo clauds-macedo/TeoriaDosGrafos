@@ -30,7 +30,7 @@ void Enqueue(struct edge heap[], int size, struct edge value) //adiciona nó na 
     }
 }
 
-void Heapify(struct edge heap[], int size, int index) // sorting of nodes
+void Heapify(struct edge heap[], int size, int index) // sort dos nós
 {
     int i = index;
     struct edge temp;
