@@ -10,6 +10,7 @@ int main(int argc, char* argv[]){
 
     int f = 0, in, invalue, only_help = 0;
     char* inputFile;
+    char* outputFile;
     char* src;
     system("g++ bellmanford.cpp -o bellmanford");
     char comando[255] = "./bellmanford ";    
@@ -22,6 +23,7 @@ int main(int argc, char* argv[]){
             only_help--;
         }
 
+
         if(!strcmp(argv[i], "-i")){
             strcat(comando, " -i ");
             strcat(comando, argv[i+1]);
@@ -31,6 +33,13 @@ int main(int argc, char* argv[]){
             strcat(comando, " -l ");
             strcat(comando, argv[i+1]);
         }
+
+        if(!strcmp(argv[i], "-o")){
+            outputFile = argv[i+1]; 
+            strcat(comando, " > ");
+            strcat(comando, outputFile);
+        }
+        
         if(!strcmp(argv[i], "-h")) {
             help(); 
             only_help++;

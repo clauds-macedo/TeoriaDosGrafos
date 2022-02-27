@@ -13,6 +13,7 @@ int main(int argc, char* argv[]){
     char* src;
     system("g++ dijkstra.cpp -o dijkstra");
     char comando[255] = "./dijkstra ";    
+    char* outputFile;
     
     for (int i = 0; i < argc; i++){
         if(!strcmp(argv[i], "-f")){
@@ -21,6 +22,7 @@ int main(int argc, char* argv[]){
             strcat(comando, inputFile);
             only_help--;
         }
+
 
         if(!strcmp(argv[i], "-i")){
             strcat(comando, " -i ");
@@ -31,6 +33,13 @@ int main(int argc, char* argv[]){
             strcat(comando, " -l ");
             strcat(comando, argv[i+1]);
         }
+
+        if(!strcmp(argv[i], "-o")){
+            outputFile = argv[i+1]; 
+            strcat(comando, " > ");
+            strcat(comando, outputFile);
+        }
+
         if(!strcmp(argv[i], "-h")) {
             help(); 
             only_help++;
@@ -38,7 +47,6 @@ int main(int argc, char* argv[]){
     }
 
     if (only_help <= 0)system(comando);
-
     return 0;
 
 }
